@@ -57,12 +57,14 @@ ToDoList.prototype.deleteItem = function(id) {
 }
 
 function ListController(list){
-  $(".destinationList").append("<div id = ListTitle" + list.name + ">" + list.name + "</div>" + "<ul id = List" + list.name + "></ul>");
+  $(".destinationList").append("<div id = ListTitle" + list.name + ">" + list.name + "</div>" + "<div class=section" + list.name + "><ul id = List" + list.name + "></ul></div>");
   $("#ListTitle"+list.name).click(function(event){
-    $("#List"+list.name).toggle();
+    $(".section"+list.name).toggle();
   })
 
-  $("#List" + list.name).after("<form id = form" + list.name + " action=index.html method=post><label for=CreateNewList>New Item:</label><input id = input name=CreateNewList " + list.name + ">" + "<button type=submit >Add</button></form>")
+  $("div.section" + list.name).append("<form id = form" + list.name + " action=index.html method=post><label for=CreateNewList>New Item:</label><input id = input name=CreateNewList " + list.name + ">" + "<button type=submit >Add</button></form>")
+
+
 
   var string = "#form" + list.name;
   $(string).submit(function(event){
@@ -100,15 +102,7 @@ $(function(){
     var newList = new ToDoList(newListName);
     ListController(newList);
   });
-
-  // var myList = new ToDoList("list1");
-  // var item1 = new ListItem("wash car", 2, 4);
-  // myList.addItem(item1);
-  // var item2 = new ListItem("do hw", 3, 9);
-  // myList.addItem(item2);
-  //
-  // myList.printList();
-  // ListController(myList);
-  // ListItemController(item1, myList);
-  // ListItemController(item2, myList);
 });
+
+
+//if we had more time and effort: each form with 3 inputs for properties of list item, display those
